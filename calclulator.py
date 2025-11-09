@@ -25,6 +25,7 @@ color_white = "white"
 window = tkinter.Tk() #create the window
 window.title ("Calculator")
 window.resizable(False, False)
+window.geometry("360x520")
 
 frame = tkinter.Frame(window)
 label = tkinter.Label(
@@ -35,23 +36,34 @@ label = tkinter.Label(
     foreground=color_white
 )
 
-label.grid(row= 0, column=0)
+label.grid(row=0, column=0, columnspan=column_count, sticky="nsew", pady=5)
 
 for row in range(row_count):
     for column in range(column_count):
-        value = button_values [row] [column]
-        button = tkinter.Button(frame, text = value, font=("Arial", 30), 
-                                width=column_count-1, height = 1,
-                                command=lambda value=value: button_clicked(value))
-        button.grid(row=row+1, column=column, padx=5, pady=5)
+        value = button_values[row][column]
+        button = tkinter.Button(
+            frame,
+            text=value,
+            font=("Arial", 30),
+            background=color_light_gray,
+            foreground=color_black,
+            activebackground="#E5E5E5",
+            relief="flat",
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda value=value: button_clicked(value)
+        )
+        button.grid(row=row+1, column=column, padx=5, pady=5, ipady=10, sticky="nsew")
 
 
-frame.pack()
+frame.pack(fill="both", expand=True)
 
 def button_clicked(value):
     pass
 
 for c in range(column_count):
     frame.grid_columnconfigure(c, weight=1)
+for r in range(row_count + 1):
+    frame.grid_rowconfigure(r, weight=1)
 
 window.mainloop()
