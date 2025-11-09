@@ -12,7 +12,7 @@ right_symbols = ["÷", "×", "-", "+", "="]
 top_symbols = ["AC", "+/-", "%"]
 
 row_count = len(button_values)#5
-column_count = len(button_values) #4
+column_count = len(button_values[0])  # 4
 
 
 color_light_gray = "#D4D4D2"
@@ -43,12 +43,15 @@ for row in range(row_count):
         button = tkinter.Button(frame, text = value, font=("Arial", 30), 
                                 width=column_count-1, height = 1,
                                 command=lambda value=value: button_clicked(value))
-        button.grid(row=row+1, column=column)
+        button.grid(row=row+1, column=column, padx=5, pady=5)
 
 
 frame.pack()
 
 def button_clicked(value):
     pass
+
+for c in range(column_count):
+    frame.grid_columnconfigure(c, weight=1)
 
 window.mainloop()
