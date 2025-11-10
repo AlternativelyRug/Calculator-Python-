@@ -28,6 +28,7 @@ window.resizable(False, False)
 window.geometry("360x520")
 
 frame = tkinter.Frame(window)
+frame.configure(background=color_black)
 label = tkinter.Label(
     frame,
     text="0",
@@ -37,6 +38,9 @@ label = tkinter.Label(
 )
 
 label.grid(row=0, column=0, columnspan=column_count, sticky="nsew", pady=5)
+label.lift()
+label.configure(anchor="e")
+frame.grid_rowconfigure(0, weight=0, minsize=90)
 
 for row in range(row_count):
     for column in range(column_count):
@@ -63,7 +67,7 @@ def button_clicked(value):
 
 for c in range(column_count):
     frame.grid_columnconfigure(c, weight=1)
-for r in range(row_count + 1):
+for r in range(1, row_count + 1):
     frame.grid_rowconfigure(r, weight=1)
 
 window.mainloop()
